@@ -1,90 +1,305 @@
+:root {
+  --bg: #eef3f6;
+  --bg-deep: #dce7ec;
+  --ink: #071014;
+  --muted: #53666f;
+  --pale: #8da0a8;
+  --line: rgba(7, 16, 20, 0.16);
+  --panel: rgba(255, 255, 255, 0.52);
+  --signal: #b7ff2a;
+  --signal-soft: rgba(183, 255, 42, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
 body {
   margin: 0;
-  background: #ffffff;
-  color: #000000;
-  font-family: "IBM Plex Mono", monospace;
+  min-height: 100%;
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.78), transparent 31%),
+    radial-gradient(circle at 84% 12%, rgba(183, 255, 42, 0.16), transparent 22%),
+    linear-gradient(145deg, #f7fbfd 0%, var(--bg) 45%, var(--bg-deep) 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(7, 16, 20, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7, 16, 20, 0.045) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: 0.52;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 13px,
+      rgba(7, 16, 20, 0.035) 14px
+    );
+  opacity: 0.28;
 }
 
 .page {
-  max-width: 720px;
+  width: min(980px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 58px 0 52px;
+  position: relative;
 }
 
 .masthead {
-  margin-bottom: 60px;
+  max-width: 780px;
+  margin: 0 auto 62px;
+  padding: 34px 34px 32px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 70px rgba(7, 16, 20, 0.08);
+  position: relative;
+}
+
+.masthead::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 88px;
+  height: 6px;
+  background: var(--signal);
 }
 
 h1 {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  font-size: 48px;
-  letter-spacing: -1px;
+  max-width: 720px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(3rem, 8.5vw, 6.7rem);
+  line-height: 0.88;
+  font-weight: 700;
+  letter-spacing: -0.085em;
+  text-transform: uppercase;
 }
 
 .subtitle {
-  margin: 10px 0 30px;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
+  margin: 22px 0 0;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  line-height: 1;
+  font-weight: 500;
+  color: var(--muted);
 }
 
-.cast-title {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  margin-bottom: 10px;
+.cast {
+  margin-top: 42px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
 }
 
-.cast p {
-  margin: 2px 0;
+.cast h2 {
+  margin: 0 0 16px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cast-list {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 10px 18px;
+  align-items: start;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.cast-list span {
+  white-space: nowrap;
+}
+
+.play {
+  max-width: 780px;
+  margin: 0 auto;
 }
 
 .stage {
-  margin: 30px 0;
+  width: min(680px, 100%);
+  margin: 32px auto;
+  padding-left: 18px;
+  border-left: 4px solid var(--signal);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.55;
   font-style: italic;
-  color: #444;
+  color: var(--muted);
 }
 
 .speech {
-  margin: 24px 0;
+  margin: 28px 0;
+  padding: 18px 0 0;
+  border-top: 1px solid rgba(7, 16, 20, 0.14);
+}
+
+.speech:first-of-type {
+  margin-top: 44px;
 }
 
 .speaker {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
+  margin: 0 0 9px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .speech p {
-  margin: 4px 0;
-}
-
-.aside {
-  color: #555;
+  margin: 0;
+  max-width: 650px;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.62;
 }
 
 .direction {
+  margin: 0 0 7px !important;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.9rem !important;
+  line-height: 1.35 !important;
   font-style: italic;
-  color: #555;
+  color: var(--muted);
+}
+
+.speech.long {
+  margin: 44px 0;
+  padding: 28px 28px 30px;
+  border: 1px solid rgba(7, 16, 20, 0.18);
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: inset 6px 0 0 var(--signal-soft);
+}
+
+.speech.long p:not(.speaker) {
+  margin-top: 20px;
+}
+
+.speech.long .speaker + p {
+  margin-top: 0;
 }
 
 .isolated {
-  margin-top: 16px;
+  margin-top: 30px !important;
+  font-size: clamp(1.25rem, 3vw, 1.65rem) !important;
+  letter-spacing: 0.02em;
 }
 
 .final {
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 
 .footer {
-  margin-top: 80px;
+  max-width: 780px;
+  margin: 84px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
   text-align: center;
 }
 
 .footer a {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: lowercase;
   text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #666;
+  color: var(--muted);
+}
+
+.footer a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .page {
+    width: min(100% - 28px, 680px);
+    padding: 38px 0 42px;
+  }
+
+  .masthead {
+    margin-bottom: 44px;
+    padding: 26px 22px 24px;
+  }
+
+  .masthead::before {
+    width: 72px;
+    height: 5px;
+  }
+
+  h1 {
+    font-size: clamp(2.45rem, 13vw, 4.35rem);
+    letter-spacing: -0.078em;
+  }
+
+  .subtitle {
+    margin-top: 18px;
+  }
+
+  .cast {
+    margin-top: 32px;
+    padding-top: 20px;
+  }
+
+  .cast-list {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    font-size: 0.86rem;
+  }
+
+  .cast-list span {
+    white-space: normal;
+  }
+
+  .stage {
+    margin: 28px auto;
+    padding-left: 14px;
+    border-left-width: 3px;
+    font-size: 0.94rem;
+  }
+
+  .speech {
+    margin: 26px 0;
+    padding-top: 16px;
+  }
+
+  .speech.long {
+    margin: 36px -2px;
+    padding: 22px 18px 24px;
+  }
+
+  .speech.long p:not(.speaker) {
+    margin-top: 18px;
+  }
+
+  .isolated {
+    margin-top: 26px !important;
+  }
+
+  .footer {
+    margin-top: 60px;
+  }
 }
