@@ -188,19 +188,21 @@ h1 {
 }
 
 .speech.long {
-  margin: 44px 0;
-  padding: 28px 28px 30px;
-  border: 1px solid rgba(7, 16, 20, 0.18);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: inset 6px 0 0 var(--signal-soft);
+  border: none;
+  background: none;
+  padding-left: 18px;
+  margin: 40px 0;
+  position: relative;
 }
 
-.speech.long p:not(.speaker) {
-  margin-top: 20px;
-}
-
-.speech.long .speaker + p {
-  margin-top: 0;
+.speech.long::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--signal);
 }
 
 .isolated {
